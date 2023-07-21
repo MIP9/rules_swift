@@ -17,9 +17,12 @@
 load("@bazel_skylib//lib:dicts.bzl", "dicts")
 load(":compiling.bzl", "output_groups_from_other_compilation_outputs")
 load(":derived_files.bzl", "derived_files")
-load(":feature_names.bzl", "SWIFT_FEATURE_BUNDLED_XCTESTS")
-load(":linking.bzl", "binary_rule_attrs", "configure_features_for_binary", "register_link_binary_action")
-load(":providers.bzl", "SwiftCompilerPluginInfo", "SwiftToolchainInfo")
+load(
+    ":feature_names.bzl",
+    "SWIFT_FEATURE_BUNDLED_XCTESTS",
+)
+load(":linking.bzl", "register_link_binary_action")
+load(":providers.bzl", "SwiftToolchainInfo")
 load(":swift_common.bzl", "swift_common")
 load(":utils.bzl", "expand_locations", "get_providers")
 load(":env_expansion.bzl", "expanded_env")
@@ -214,6 +217,7 @@ def _create_xctest_runner(name, actions, executable, xctest_runner_template):
     xctest_runner = derived_files.xctest_runner_script(
         actions = actions,
         target_name = name,
+        add_target_name_to_output_path = False,
     )
 
     actions.expand_template(
@@ -236,7 +240,7 @@ def _swift_binary_impl(ctx):
 
     _, linking_outputs, providers = _swift_linking_rule_impl(
         ctx,
-        binary_path = ctx.label.name,
+        binary_path = derived_files.path(ctx, ctx.label.name),
         feature_configuration = feature_configuration,
         swift_toolchain = swift_toolchain,
     )

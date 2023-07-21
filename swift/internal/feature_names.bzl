@@ -336,3 +336,7 @@ SWIFT_FEATURE__FORCE_ALWAYSLINK_TRUE = "swift._force_alwayslink_true"
 # 5.9 and above). Users should never manually enable, disable, or query this
 # feature.
 SWIFT_FEATURE__SUPPORTS_MACROS = "swift._supports_macros"
+
+# A feature that adds target_name in output path to support building
+# multiple frameworks with different target name, but same module name.
+SWIFT_FEATURE_ADD_TARGET_NAME_TO_OUTPUT = "swift.add_target_name_to_output"
