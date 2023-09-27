@@ -545,6 +545,10 @@ def _xcode_swift_toolchain_impl(ctx):
     apple_toolchain = apple_common.apple_toolchain()
     cc_toolchain = find_cpp_toolchain(ctx)
 
+    # buildifier: disable=print
+    print("\n My important value: {some} \n".format(
+        some = cc_toolchain.target_gnu_system_name
+    ))
     target_triple = target_triples.normalize_for_swift(
         target_triples.parse(cc_toolchain.target_gnu_system_name),
     )
