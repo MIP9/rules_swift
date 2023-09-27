@@ -21,8 +21,13 @@ load(
     ":feature_names.bzl",
     "SWIFT_FEATURE_BUNDLED_XCTESTS",
 )
-load(":linking.bzl", "register_link_binary_action")
-load(":providers.bzl", "SwiftToolchainInfo")
+load(
+    ":linking.bzl",
+     "register_link_binary_action",
+      "configure_features_for_binary",
+      "binary_rule_attrs"
+)
+load(":providers.bzl", "SwiftToolchainInfo", "SwiftCompilerPluginInfo")
 load(":swift_common.bzl", "swift_common")
 load(":utils.bzl", "expand_locations", "get_providers")
 load(":env_expansion.bzl", "expanded_env")
